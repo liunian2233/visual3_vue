@@ -6,7 +6,7 @@
       :slides-per-view="1"
       :space-between="0"
       :initial-slide="initialSlideIndex"
-      :scrollbar="{ draggable: true }"
+      :scrollbar="{ draggable: true, hide: false }"
       @swiper="onSwiperInit"
       @slideChange="onSlideChange"
       class="scene-swiper"
@@ -26,8 +26,6 @@
           </div>
         </div>
       </swiper-slide>
-      
-      <div class="swiper-scrollbar" slot="scrollbar"></div>
     </swiper>
     
     <!-- 无场景提示 -->
@@ -281,11 +279,11 @@ export default {
   width: 100%;
 }
 
-.swiper-scrollbar {
+/* Swiper scrollbar styles */
+:global(.swiper-scrollbar) {
   position: absolute;
   bottom: 30px;
   left: 50%;
-  transform: translateX(-50%);
   width: 80%;
   height: 6px;
   background: rgba(255, 255, 255, 0.2);
@@ -293,7 +291,7 @@ export default {
   z-index: 10;
 }
 
-.swiper-scrollbar-drag {
+:global(.swiper-scrollbar-drag) {
   height: 100%;
   background: rgba(255, 255, 255, 0.7);
   border-radius: 3px;

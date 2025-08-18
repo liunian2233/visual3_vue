@@ -91,7 +91,7 @@
                   <circle
                     :cx="point.x"
                     :cy="point.y"
-                    r="0.8"
+                    r="0.5"
                     class="drawing-point-outer"
                   />
                 </g>
@@ -886,7 +886,7 @@ export default {
 .hotspot-polygon {
   fill: rgba(25, 118, 210, 0.2);
   stroke: #1976d2;
-  stroke-width: 0.3;
+  stroke-width: 0.15;
   cursor: pointer;
   pointer-events: auto;
   /* 添加变换以补偿拉伸 */
@@ -935,9 +935,8 @@ export default {
   pointer-events: none;
   /* 确保点可见并补偿拉伸 */
   vector-effect: non-scaling-stroke;
-  /* 通过反向变换补偿拉伸，使点在拉伸后保持圆形 */
-  transform: scale(1, 1);
-  transform-origin: center;
+  /* 调整点的大小，使其更合适 */
+  r: 0.5;
 }
 
 .drawing-controls {

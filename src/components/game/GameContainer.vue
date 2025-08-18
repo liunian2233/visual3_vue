@@ -130,6 +130,10 @@ export default {
           if (hotspot.targetScene && sceneManager.value) {
             // 确保目标场景存在
             if (sceneManager.value.getSceneData(hotspot.targetScene)) {
+              // 隐藏所有tooltip
+              const hideTooltipEvent = new CustomEvent('hide-tooltip');
+              window.dispatchEvent(hideTooltipEvent);
+              
               // 添加到历史记录
               history.value.push(hotspot.targetScene);
               // 使用Vuex action切换场景
@@ -196,6 +200,10 @@ export default {
     const navigate = (direction) => {
       if (!sceneManager.value) return;
       
+      // 隐藏所有tooltip
+      const hideTooltipEvent = new CustomEvent('hide-tooltip');
+      window.dispatchEvent(hideTooltipEvent);
+      
       const scenes = Object.keys(allScenes.value);
       const currentIndex = scenes.indexOf(currentSceneId.value);
       
@@ -210,6 +218,10 @@ export default {
 
     // 返回首页
     const goHome = async () => {
+      // 隐藏所有tooltip
+      const hideTooltipEvent = new CustomEvent('hide-tooltip');
+      window.dispatchEvent(hideTooltipEvent);
+      
       // 重置历史记录
       history.value = [];
       
@@ -247,6 +259,10 @@ export default {
     // 返回上一个场景
     const goBack = () => {
       if (history.value.length <= 1) return;
+      
+      // 隐藏所有tooltip
+      const hideTooltipEvent = new CustomEvent('hide-tooltip');
+      window.dispatchEvent(hideTooltipEvent);
       
       // 移除当前场景
       history.value.pop();

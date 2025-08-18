@@ -97,10 +97,12 @@ export default {
     // 组件卸载时移除事件监听器
     onUnmounted(() => {
       window.removeEventListener('hide-tooltip', handleHideTooltip);
-      // 确保在组件卸载时清除定时器
+      // 确保在组件卸载时清除定时器和隐藏tooltip
       if (tooltipTimeout.value) {
         clearTimeout(tooltipTimeout.value);
       }
+      // 隐藏tooltip
+      tooltipContent.value = '';
     });
     
     // 显示Tooltip
@@ -146,6 +148,25 @@ export default {
       }
       tooltipContent.value = '';
     };
+    
+    // Tooltip内容变更监听
+    watch(tooltipContent, (newVal, oldVal) => {
+      if (newVal !== oldVal) {
+        console.log('Tooltip content changed:', newVal);
+        // 可以在这里执行其他操作，例如发送埋点、更新状态等
+      }
+    });
+
+    // 监听场景变化，当场景变化时隐藏tooltip
+    watch(
+      () => props.currentSceneId,
+      (newSceneId, oldSceneId) => {
+        if (newSceneId !== oldSceneId) {
+          // 场景变化时隐藏tooltip
+          hideTooltip();
+        }
+      }
+    );
 
     // Tooltip内容变更监听
     watch(tooltipContent, (newVal, oldVal) => {
@@ -231,6 +252,8 @@ export default {
       // 检查点击是否在热点区域内
       if (hotspot.points && isPointInPolygon({ x, y }, hotspot.points)) {
         console.log('Hotspot clicked:', hotspot);
+        // 点击热点时立即隐藏tooltip
+        hideTooltip();
         emit('hotspot-click', hotspot);
       }
     };
@@ -278,7 +301,7 @@ export default {
 .hotspot-polygon {
   fill: rgba(25, 118, 210, 0.2);
   stroke: #1976d2;
-  stroke-width: 0.5;
+  stroke-width: 0.15;
   cursor: pointer;
 }
 
