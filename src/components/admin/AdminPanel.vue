@@ -27,7 +27,7 @@
       </div>
       
       <div v-show="activeTab === 'hotspot-editor'">
-        <HotspotEditor />
+        <KonvaHotspotEditor />
       </div>
       
       <div v-show="activeTab === 'exam-config'">
@@ -49,7 +49,7 @@ import ScoreSettings from './ScoreSettings.vue';
 import SceneEditor from './SceneEditor.vue';
 import ImageUpload from './ImageUpload.vue';
 import SceneCreator from './SceneCreator.vue';
-import HotspotEditor from './HotspotEditor.vue';
+import KonvaHotspotEditor from './KonvaHotspotEditor.vue';
 
 export default {
   name: 'AdminPanel',
@@ -59,7 +59,7 @@ export default {
     SceneEditor,
     ImageUpload,
     SceneCreator,
-    HotspotEditor
+    KonvaHotspotEditor
   },
   setup() {
     const store = useStore();
